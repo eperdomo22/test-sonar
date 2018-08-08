@@ -13,9 +13,11 @@ pipeline{
   }//stage
     stage("Quality Gate") {
             steps {
+               withSonarQubeEnv('local_sonar') {
               timeout(time: 1, unit: 'MINUTES') {
                 waitForQualityGate abortPipeline: true
               }
+               }
             }
           }
 }//stages
