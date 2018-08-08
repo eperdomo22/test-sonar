@@ -3,8 +3,11 @@ pipeline{
   stages{
     stage('build'){
       steps{
-        withSonarQubeEnv('local_sonar') {
-          sh "{tool 'sq-scanner'}/bin/sonar-scanner -Dsonar.projectKey=test01"
+        script{
+          def scanner = tool 'sq-scanner'
+          withSonarQubeEnv('local_sonar') {
+          sh "${scanner}/bin/sonar-scanner -Dsonar.projectKey=test01"
+          }
         }
         }//steps
   }//stage
